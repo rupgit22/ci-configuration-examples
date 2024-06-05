@@ -18,6 +18,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+    matrix:
+    release: [R2020a, R2020b, R2021a, R2021b, R2022a]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,6 +30,8 @@ jobs:
       # Sets up MATLAB on a GitHub-hosted runner
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
+        with:
+        release: s{{matrix.release}}
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
